@@ -3,6 +3,8 @@ import About from './components/About';
 import Navbar from './components/Navbar';
 import Alert from './components/Alert';
 import TextForm from './components/TextForm';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+
 
 function App() {
   const [mode, setmode] = useState('light');
@@ -24,12 +26,12 @@ function App() {
       setmode('dark');
       document.body.style.backgroundColor = '#212529';
       showAlert('Dark mode enabled', 'success');
-      document.title ="textUtils - dark home"
+      document.title = "textUtils - dark home"
     } else {
       setmode('light');
-      document.body.style.backgroundColor = '#fff';
+      document.body.style.backgroundColor = '#f8f9fa';
       showAlert('Light mode enabled', 'success');
-      document.title ="textUtils - light home"
+      document.title = "textUtils - light home"
     }
     // setInterval(() => {
     //   document.title ="bckc after 1.5 sec"
@@ -49,11 +51,11 @@ function App() {
   // Define an inline style object for the text color
   const textColorStyle = {
     color: selectedColor,
-    
+
   };
 
   return (
-    <>
+    <Router>
       <div style={textColorStyle}>
         <Navbar
           text="Reports"
@@ -64,12 +66,14 @@ function App() {
           usedColor={selectedColor}
         />
         <Alert alert={alert} />
-        <div className="container mt-3">
-          <TextForm mode={mode} showAlert={showAlert} />
+        <div className="container">
+        <Routes>
+           <Route exact path="/" element={<TextForm mode={mode} showAlert={showAlert} />}/>
+           <Route exact path="about" element={<About mode={mode} />} />
+        </Routes>
         </div>
-        <About mode={mode} />
       </div>
-    </>
+    </Router>
   );
 }
 

@@ -5,7 +5,7 @@ export default function About(props) {
 
     const txtColor = (props.mode === "light" ? "dark" : "white")
     const linkColor = (props.mode === "light" ? "light" : "dark") //
-    console.log(props.mode,txtColor, linkColor)
+    console.log(props.mode,txtColor, linkColor,`link-${linkColor}`)
     return (
         <div>
             <header className={`py-5 bg-${linkColor} text-${txtColor}`}>
@@ -26,9 +26,9 @@ export default function About(props) {
                     <div className="row align-items-center justify-content-between flex-column flex-sm-row">
                         <div className="col-auto"><div className={`small m-0 text-${txtColor}`}>Copyright &copy; Your Website 2023</div></div>
                         <div className="col-auto">
-                            <a className={`link-${linkColor} small`} href="#!">Privacy</a>
+                            <a className={`link-primary small`} href="#!">Privacy</a>
                             <span className={`text-${txtColor} mx-1`}>&middot;</span>
-                            <a className={`link-${linkColor} small`} href="#!">Terms</a>
+                            <a className={`link-primary small`} href="#!">Terms</a>
                             <span className={`text-${txtColor} mx-1`}>&middot;</span>
                             <a className={`link-${linkColor} small`} href="#!">Contact</a>
                         </div>

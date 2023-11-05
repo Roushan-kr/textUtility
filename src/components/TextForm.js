@@ -44,7 +44,7 @@ export default function TextForm(props) {
 
 
     return (
-        <div className={`form-outline mb-4  bg-${props.mode} text-${props.mode === "light" ? "dark" : "white"}`}>
+        <div className={`form-outline mb-4 my-3 text-${props.mode === "light" ? "dark" : "white"}`}>
             <label className="form-label" htmlFor="textForm">Enter Your Text here</label>
             <textarea className="form-control" id="textForm" rows="4" value={text} onChange={handelCng}></textarea>
             <div className='text-center m-3'>
