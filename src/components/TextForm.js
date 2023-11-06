@@ -27,15 +27,21 @@ export default function TextForm(props) {
         // console.log(text.split(" "))
     }
     const handelWCount =()=>{
-        let textArr= text.split(" ")
-        if(textArr[textArr.length]!==" "){
-           return textArr.length-1
+        let textArr= text.split(/\s+/)
+        // console.log(textArr)
+        if(textArr[textArr.length]!==""){
+            return textArr.length-1
         }
     }   
     
     const handelClear =()=>{
         setText("")
         props.showAlert("Enter new text")
+
+    }   
+    const handelSpace =()=>{
+        setText(text.replace(/\s+/g, ' ').trim())
+        props.showAlert("Extra spcace got removed")
 
     }   
     
@@ -45,14 +51,20 @@ export default function TextForm(props) {
 
     return (
         <div className={`form-outline mb-4 my-3 text-${props.mode === "light" ? "dark" : "white"}`}>
-            <label className="form-label" htmlFor="textForm">Enter Your Text here</label>
+            <h3 className='m-2 text-center'style={{display:"none"}}>{props.heading}</h3>
+            <label className="form-label mt-3" htmlFor="textForm">Enter Your Text here</label>
             <textarea className="form-control" id="textForm" rows="4" value={text} onChange={handelCng}></textarea>
             <div className='text-center m-3'>
-                <button type="button" className="btn btn-primary" onClick={handleClick}>
+                <button type="button" className="btn btn-primary" onClick={handleClick} disabled={text.length===0}>
                     Copy Text
                 </button>
-                <button className="btn btn-primary mx-2" onClick={handelToglClk}>Change Case</button>
-                <button className="btn btn-primary mx-2" onClick={handelClear}>Clear Text</button>
+                <button className="btn btn-primary mx-2 " onClick={handelToglClk} disabled={text.length===0}>Change Case</button>
+                <button className="btn btn-primary mx-2 my-2" onClick={handelClear} disabled={text.length===0}>Clear Text</button>
+                <button className="btn btn-primary mx-2 my-2" onClick={handelSpace} disabled={text.length===0}>Renove Extra space</button>
+                {/* onlinck need function not function call for function call put it inside a arrow function which behave as fucntion help in getting a function call */}
+                {/* eg:-  onclick={callme("arg")} X(wrong) */}
+                {/* for doing this onclick={()=>{callme("arg")}} */}
+
             </div>
             <div className='my-4'>
                 <h3 className='text-center'>
@@ -61,6 +73,12 @@ export default function TextForm(props) {
                 <p> Total latter Enterd:- {text.length}</p>
                 <p>Total Word Entered :- {handelWCount()}</p>
                 <p>Time To Read:- {(handelWCount()/3.5).toFixed(2)} sec</p>
+            </div>
+            <div className='my-4'>
+                <h3 className='text-center'>
+                    Your text <small className="text-body-secondary">Preview</small>
+                </h3>
+                    <p>{text.length===0?"Nothing to Preview ":text}</p>
             </div>
         </div>
     );
